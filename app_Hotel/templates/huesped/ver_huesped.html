@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">👥 Lista de Huéspedes</h4>
+        <a href="{% url 'agregar_huesped' %}" class="btn btn-light">➕ Agregar Huésped</a>
+    </div>
+    <div class="card-body">
+        {% if huespedes %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for huesped in huespedes %}
+                    <tr>
+                        <td>{{ huesped.id }}</td>
+                        <td>{{ huesped.nombre }}</td>
+                        <td>{{ huesped.apellido }}</td>
+                        <td>{{ huesped.email }}</td>
+                        <td>{{ huesped.telefono }}</td>
+                        <td>
+                            <a href="{% url 'actualizar_huesped' huesped.id %}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                            <a href="{% url 'borrar_huesped' huesped.id %}" class="btn btn-danger btn-sm">🗑️ Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center">
+            <h5>No hay huéspedes registrados</h5>
+            <p>Comienza agregando el primer huésped al sistema.</p>
+            <a href="{% url 'agregar_huesped' %}" class="btn btn-primary">Agregar Primer Huésped</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

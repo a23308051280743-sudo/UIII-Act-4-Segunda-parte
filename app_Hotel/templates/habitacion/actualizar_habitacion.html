@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-warning">
+        <h4>✏️ Actualizar Habitación</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            <label>Número:</label>
+            <input class="form-control" name="numero" value="{{ habitacion.numero }}" required>
+
+            <label>Tipo:</label>
+            <select class="form-control" name="tipo">
+                <option value="Sencilla" {% if habitacion.tipo == "Sencilla" %}selected{% endif %}>Sencilla</option>
+                <option value="Doble" {% if habitacion.tipo == "Doble" %}selected{% endif %}>Doble</option>
+                <option value="Suite" {% if habitacion.tipo == "Suite" %}selected{% endif %}>Suite</option>
+            </select>
+
+            <label>Precio:</label>
+            <input class="form-control" name="precio" value="{{ habitacion.precio }}" required>
+
+            <label>Capacidad:</label>
+            <input class="form-control" name="capacidad" value="{{ habitacion.capacidad }}" required>
+
+            <label>Ubicación:</label>
+            <input class="form-control" name="ubicacion" value="{{ habitacion.ubicacion }}" required>
+
+            <label>Ocupada:</label>
+            <input type="checkbox" name="ocupada" {% if habitacion.ocupada %}checked{% endif %}>
+
+            <br>
+            <button class="btn btn-warning">Actualizar</button>
+            <a href="{% url 'ver_habitaciones' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

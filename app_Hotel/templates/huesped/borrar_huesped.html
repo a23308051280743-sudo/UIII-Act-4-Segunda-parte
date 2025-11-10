@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">🗑️ Confirmar Eliminación</h4>
+            </div>
+            <div class="card-body text-center">
+                <h5>¿Estás seguro de que deseas eliminar al huésped?</h5>
+                <p class="lead">{{ huesped.nombre }} {{ huesped.apellido }}</p>
+                <p><strong>Email:</strong> {{ huesped.email }}</p>
+                <p><strong>Teléfono:</strong> {{ huesped.telefono }}</p>
+                
+                <form method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
+                </form>
+                <a href="{% url 'ver_huespedes' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

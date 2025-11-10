@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-success text-white d-flex justify-content-between">
+        <h4>Habitaciones Registradas</h4>
+        <a href="{% url 'agregar_habitacion' %}" class="btn btn-light">➕ Agregar</a>
+    </div>
+
+    <div class="card-body">
+        {% if habitaciones %}
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Número</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Capacidad</th>
+                <th>Ocupada</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+            </tr>
+
+            {% for h in habitaciones %}
+            <tr>
+                <td>{{ h.id }}</td>
+                <td>{{ h.numero }}</td>
+                <td>{{ h.tipo }}</td>
+                <td>{{ h.precio }}</td>
+                <td>{{ h.capacidad }}</td>
+                <td>{{ h.ocupada }}</td>
+                <td>{{ h.ubicacion }}</td>
+                <td>
+                    <a href="{% url 'actualizar_habitacion' h.id %}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                    <a href="{% url 'borrar_habitacion' h.id %}" class="btn btn-danger btn-sm">🗑️ Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% else %}
+        <div class="alert alert-info text-center">
+            <h5>No hay habitaciones registradas</h5>
+            <a href="{% url 'agregar_habitacion' %}" class="btn btn-primary">Agregar primera habitación</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
